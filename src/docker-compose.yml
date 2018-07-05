@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  shoponcore.orders.messageprocessor.app:
+    image: ${DOCKER_REGISTRY}shoponcoreordersmessageprocessorapp
+    build:
+      context: .
+      dockerfile: ShopOnCore.Orders.MessageProcessor.App/Dockerfile
+
+  shoponcore.web:
+    image: ${DOCKER_REGISTRY}shoponcoreweb
+    build:
+      context: .
+      dockerfile: ShopOnCore.Web/Dockerfile
+
