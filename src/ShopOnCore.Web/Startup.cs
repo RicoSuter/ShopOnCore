@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using ShopOnCore.Common.Messaging;
 using ShopOnCore.Common.Messaging.ServiceBus;
 using ShopOnCore.Orders.Contract;
+using ShopOnCore.Orders.Services;
 
 namespace ShopOnCore.Web
 {
@@ -22,6 +24,7 @@ namespace ShopOnCore.Web
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.TryAddScoped<IOrdersService, OrdersService>();
             services.AddMessageSender(provider =>
             {
                 return new ServiceBusMessageSender<CreateOrderMessage>(

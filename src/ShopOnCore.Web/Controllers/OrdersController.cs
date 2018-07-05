@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnCore.Common.Messaging;
 using ShopOnCore.Orders.Contract;
+using ShopOnCore.Orders.Services;
 
 namespace ShopOnCore.Web.Controllers
 {
@@ -10,10 +11,12 @@ namespace ShopOnCore.Web.Controllers
     public class OrdersController : Controller
     {
         private readonly IMessageSender<CreateOrderMessage> _messageSender;
+        private readonly IOrdersService _ordersService;
 
-        public OrdersController(IMessageSender<CreateOrderMessage> messageSender)
+        public OrdersController(IMessageSender<CreateOrderMessage> messageSender, IOrdersService ordersService)
         {
             _messageSender = messageSender;
+            _ordersService = ordersService;
         }
 
         [HttpPost]
@@ -31,7 +34,7 @@ namespace ShopOnCore.Web.Controllers
         [HttpGet]
         public async Task<IEnumerable<CreateOrderMessage>> GetOrders()
         {
-            return await CreateOrderMessage.LoadAllAsync();
+            return await _ordersService.GetAllAsync();
         }
     }
 }

@@ -1,15 +1,21 @@
 version: '3.4'
 
 services:
-  shoponcore.orders.messageprocessor.app:
-    image: ${DOCKER_REGISTRY}shoponcoreordersmessageprocessorapp
+  shoponcore.orders.app:
+    image: ${DOCKER_REGISTRY}shoponcoreordersapp
     build:
       context: .
-      dockerfile: ShopOnCore.Orders.MessageProcessor.App/Dockerfile
+      dockerfile: ShopOnCore.Orders.App/Dockerfile
+    links:
+      - redis_db
 
   shoponcore.web:
     image: ${DOCKER_REGISTRY}shoponcoreweb
     build:
       context: .
       dockerfile: ShopOnCore.Web/Dockerfile
+    links:
+      - redis_db
 
+  redis_db:
+    image: "redis:alpine"

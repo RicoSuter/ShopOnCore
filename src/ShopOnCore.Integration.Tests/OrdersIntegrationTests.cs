@@ -4,10 +4,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using ShopOnCore.Common.Messaging;
 using ShopOnCore.Orders.App.Services;
 using ShopOnCore.Orders.Contract;
+using ShopOnCore.Orders.Services;
 using Xunit;
 
 namespace ShopOnCore.Integration.Tests
@@ -34,6 +36,7 @@ namespace ShopOnCore.Integration.Tests
 
         protected override void ConfigureTestServerServices(IServiceCollection serviceCollection)
         {
+            serviceCollection.TryAddScoped<IOrdersService, InMemoryOrdersService>();
             serviceCollection.AddInProcessMessageHandler<CreateOrderMessageHandler, CreateOrderMessage>();
         }
 

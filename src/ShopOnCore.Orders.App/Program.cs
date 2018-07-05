@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ShopOnCore.Common.Messaging;
 using ShopOnCore.Common.Messaging.ServiceBus;
 using ShopOnCore.Orders.App.Services;
 using ShopOnCore.Orders.Contract;
+using ShopOnCore.Orders.Services;
 
 namespace ShopOnCore.Orders.App
 {
@@ -25,6 +27,8 @@ namespace ShopOnCore.Orders.App
               .ConfigureServices((hostContext, services) =>
               {
                   services.AddOptions();
+
+                  services.TryAddScoped<IOrdersService, OrdersService>();
 
                   // Register ServiceBusMessageProcessor
                   services.AddScoped<IMessageHandler<CreateOrderMessage>, CreateOrderMessageHandler>();

@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnCore.Orders.App", "Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopOnCore.Orders.Contract", "ShopOnCore.Orders.Contract\ShopOnCore.Orders.Contract.csproj", "{104B7DEC-F29C-4C79-A634-8C6D5D77CF4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopOnCore.Orders.Services", "..\ShopOnCore.Orders.Services\ShopOnCore.Orders.Services.csproj", "{207108B1-4F2E-45CC-A1C1-115D011FCA18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{104B7DEC-F29C-4C79-A634-8C6D5D77CF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{104B7DEC-F29C-4C79-A634-8C6D5D77CF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{104B7DEC-F29C-4C79-A634-8C6D5D77CF4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{207108B1-4F2E-45CC-A1C1-115D011FCA18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{207108B1-4F2E-45CC-A1C1-115D011FCA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{207108B1-4F2E-45CC-A1C1-115D011FCA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{207108B1-4F2E-45CC-A1C1-115D011FCA18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{B045A89D-6DE8-4183-9FB2-563B321F0EF1} = {246669C8-31F1-4D3F-B815-085C109216F5}
 		{2501F134-A77E-45D5-85F4-C8D73882B92D} = {70BECBD9-A71D-4948-8AF3-39031F8894C9}
 		{104B7DEC-F29C-4C79-A634-8C6D5D77CF4D} = {70BECBD9-A71D-4948-8AF3-39031F8894C9}
+		{207108B1-4F2E-45CC-A1C1-115D011FCA18} = {70BECBD9-A71D-4948-8AF3-39031F8894C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F17353DD-E038-4B9F-B6D8-457A740897F6}
