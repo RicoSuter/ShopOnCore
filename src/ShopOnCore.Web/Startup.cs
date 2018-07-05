@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using NSwag.AspNetCore;
 using ShopOnCore.Common.Messaging;
 using ShopOnCore.Common.Messaging.ServiceBus;
 using ShopOnCore.Orders.Contract;
@@ -24,6 +25,8 @@ namespace ShopOnCore.Web
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddSwagger();
+
             services.TryAddScoped<IOrdersService, OrdersService>();
             services.AddMessageSender(provider =>
             {
@@ -43,6 +46,8 @@ namespace ShopOnCore.Web
             {
                 app.UseHsts();
             }
+
+            app.UseSwaggerUi3WithApiExplorer();
 
             app.UseHttpsRedirection();
             app.UseMvc();
