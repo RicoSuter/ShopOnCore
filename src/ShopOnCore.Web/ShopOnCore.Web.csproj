@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ShopOnCore.Orders.Services\ShopOnCore.Orders.Services.csproj" />
+    <ProjectReference Include="..\ShopOnCore.Orders.Services\ShopOnCore.Orders.Services.csproj" />
     <ProjectReference Include="..\ShopOnCore.Common\ShopOnCore.Common.csproj" />
     <ProjectReference Include="..\ShopOnCore.Orders.Contract\ShopOnCore.Orders.Contract.csproj" />
   </ItemGroup>

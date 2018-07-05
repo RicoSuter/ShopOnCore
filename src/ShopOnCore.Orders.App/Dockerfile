@@ -2,17 +2,17 @@ FROM microsoft/dotnet:2.1-runtime AS base
 WORKDIR /app
 
 FROM microsoft/dotnet:2.1-sdk AS build
-WORKDIR /src
-COPY ShopOnCore.Orders.MessageProcessor.App/ShopOnCore.Orders.MessageProcessor.App.csproj ShopOnCore.Orders.MessageProcessor.App/
-RUN dotnet restore ShopOnCore.Orders.MessageProcessor.App/ShopOnCore.Orders.MessageProcessor.App.csproj
+WORKDIR .
+COPY ShopOnCore.Orders.App/ShopOnCore.Orders.App.csproj ShopOnCore.Orders.App/
+RUN dotnet restore ShopOnCore.Orders.App/ShopOnCore.Orders.App.csproj
 COPY . .
-WORKDIR /src/ShopOnCore.Orders.MessageProcessor.App
-RUN dotnet build ShopOnCore.Orders.MessageProcessor.App.csproj -c Release -o /app
+WORKDIR /ShopOnCore.Orders.App
+RUN dotnet build ShopOnCore.Orders.App.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish ShopOnCore.Orders.MessageProcessor.App.csproj -c Release -o /app
+RUN dotnet publish ShopOnCore.Orders.App.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "ShopOnCore.Orders.MessageProcessor.App.dll"]
+ENTRYPOINT ["dotnet", "ShopOnCore.Orders.App.dll"]
