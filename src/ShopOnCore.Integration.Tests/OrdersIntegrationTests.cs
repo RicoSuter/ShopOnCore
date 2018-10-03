@@ -58,6 +58,7 @@ namespace ShopOnCore.Integration.Tests
                 return orders.FirstOrDefault(o => o.Product == guid);
             }, TimeSpan.FromSeconds(30));
 
+            Assert.Equal(guid, order.Id);
             Assert.Equal(3, order.Amount);
         }
     }
