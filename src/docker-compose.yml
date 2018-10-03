@@ -8,6 +8,7 @@ services:
       dockerfile: ShopOnCore.Orders.App/Dockerfile
     links:
       - redis_db
+      - rabbit_queue
 
   shoponcore.web:
     image: ${DOCKER_REGISTRY}shoponcoreweb
@@ -16,6 +17,18 @@ services:
       dockerfile: ShopOnCore.Web/Dockerfile
     links:
       - redis_db
+      - rabbit_queue
 
   redis_db:
     image: "redis:alpine"
+
+  rabbit_queue:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit_queue"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "ALKJDLKJEIKDVIEHJHDL"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    labels:
+      NAME: "rabbit_queue"

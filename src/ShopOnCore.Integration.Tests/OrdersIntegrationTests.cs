@@ -55,7 +55,7 @@ namespace ShopOnCore.Integration.Tests
                 var response = await HttpClient.GetAsync("api/orders");
                 var json = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<IEnumerable<CreateOrderMessage>>(json);
-            }, n => n.Any(x => x.Product == guid), TimeSpan.FromSeconds(30));
+            }, msgs => msgs.Any(msg => msg.Product == guid), TimeSpan.FromSeconds(30));
         }
     }
 }

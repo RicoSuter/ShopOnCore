@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using NSwag.AspNetCore;
 using ShopOnCore.Common.Messaging;
-using ShopOnCore.Common.Messaging.ServiceBus;
+using ShopOnCore.Common.Messaging.Rabbit;
 using ShopOnCore.Orders.Contract;
 using ShopOnCore.Orders.Services;
 
@@ -28,12 +28,8 @@ namespace ShopOnCore.Web
             services.AddSwagger();
 
             services.TryAddScoped<IOrdersService, OrdersService>();
-            services.AddMessageSender(provider =>
-            {
-                return new ServiceBusMessageSender<CreateOrderMessage>(
-                    Configuration.GetSection("ServiceBus")["ConnectionString"],
-                    Configuration.GetSection("ServiceBus")["EntityPath"]);
-            });
+            services.AddMessageSender(provider => new RabbitMessageSender<CreateOrderMessage>(
+                new RabbitConfiguration { Host = "rabbit_queue" }));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
