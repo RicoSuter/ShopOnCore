@@ -50,12 +50,15 @@ namespace ShopOnCore.Integration.Tests
             await HttpClient.PostAsync("api/orders?product=" + guid + "&amount=3", new StringContent(string.Empty));
 
             // Assert
-            await AwaitAsync(async () =>
+            var order = await AwaitNotNullAsync(async () =>
             {
                 var response = await HttpClient.GetAsync("api/orders");
                 var json = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<IEnumerable<CreateOrderMessage>>(json);
-            }, msgs => msgs.Any(msg => msg.Product == guid), TimeSpan.FromSeconds(30));
+                var orders = JsonConvert.DeserializeObject<IEnumerable<CreateOrderMessage>>(json);
+                return orders.FirstOrDefault(o => o.Product == guid);
+            }, TimeSpan.FromSeconds(30));
+
+            Assert.Equal(3, order.Amount);
         }
     }
 }

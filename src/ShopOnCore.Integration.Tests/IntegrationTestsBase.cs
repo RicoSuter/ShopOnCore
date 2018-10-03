@@ -31,6 +31,11 @@ namespace ShopOnCore.Integration.Tests
 
         protected abstract void ConfigureTestServerServices(IServiceCollection serviceCollection);
 
+        protected Task<T> AwaitNotNullAsync<T>(Func<Task<T>> action, TimeSpan timeout)
+        {
+            return AwaitAsync<T>(action, item => item != null, timeout);
+        }
+
         protected async Task<T> AwaitAsync<T>(Func<Task<T>> action, Predicate<T> check, TimeSpan timeout)
         {
             var now = DateTime.UtcNow;
