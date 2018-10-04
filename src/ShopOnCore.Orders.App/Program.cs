@@ -32,14 +32,9 @@ namespace ShopOnCore.Orders.App
                   // Register custom services
                   services.TryAddScoped<IOrdersService, OrdersService>();
 
-                  // Register CreateOrderMessage handler
-                  services.AddScoped<IMessageHandler<CreateOrderMessage>, CreateOrderMessageHandler>();
-
                   // Register hosted service (entry point)
-                  services.AddSingleton<IHostedService, RabbitMessageReceiver<CreateOrderMessage>>(
-                      serviceProvider => new RabbitMessageReceiver<CreateOrderMessage>(
-                          new RabbitConfiguration { Host = "rabbit_queue" },
-                          serviceProvider.GetRequiredService<IServiceScopeFactory>()));
+                  services.AddMessageReceiver((serviceProvider, scopeFactory) => new RabbitMessageReceiver<CreateOrderMessage, CreateOrderMessageHandler>(
+                      new RabbitConfiguration { Host = "rabbit_queue" }, scopeFactory));
               })
               .ConfigureLogging((hostingContext, logging) =>
               {

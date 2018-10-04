@@ -10,13 +10,13 @@ namespace ShopOnCore.Web.Controllers
     [Route("api/[controller]")]
     public class OrdersController : Controller
     {
-        private readonly IMessageSender<CreateOrderMessage> _messageSender;
         private readonly IOrdersService _ordersService;
+        private readonly IMessageSender<CreateOrderMessage> _messageSender;
 
-        public OrdersController(IMessageSender<CreateOrderMessage> messageSender, IOrdersService ordersService)
+        public OrdersController(IOrdersService ordersService, IMessageSender<CreateOrderMessage> messageSender)
         {
-            _messageSender = messageSender;
             _ordersService = ordersService;
+            _messageSender = messageSender;
         }
 
         [HttpPost]

@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-#pragma warning disable CS4014
 namespace ShopOnCore.Common.Messaging
 {
     public class InProcessMessageSender<TMessage, TMessageHandler> : IMessageSender<TMessage>
@@ -25,16 +24,17 @@ namespace ShopOnCore.Common.Messaging
             }
             else
             {
+                #pragma warning disable CS4014
                 Task.Run(async () =>
                 {
                     try
                     {
                         await _handler.HandleAsync(message, CancellationToken.None);
                     }
-                    catch (Exception e)
+                    catch (Exception exception)
                     {
                         // TODO: Handle e
-                        Console.WriteLine("In-process message processing failed: " + e);
+                        Console.WriteLine("In-process message processing failed: " + exception);
                     }
                 });
             }

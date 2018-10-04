@@ -6,7 +6,8 @@ using Microsoft.Extensions.Hosting;
 
 namespace ShopOnCore.Common.Messaging
 {
-    public abstract class MessageReceiver<TMessage, TRawMessage> : IHostedService
+    public abstract class MessageReceiver<TMessage, TRawMessage, TMessageHandler> : IHostedService
+        where TMessageHandler : IMessageHandler<TMessage>
     {
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
@@ -46,7 +47,7 @@ namespace ShopOnCore.Common.Messaging
         {
             var message = DeserializeMessage(rawMessage);
 
-            var handler = serviceScope.ServiceProvider.GetRequiredService<IMessageHandler<TMessage>>();
+            var handler = ActivatorUtilities.CreateInstance<TMessageHandler>(serviceScope.ServiceProvider);
             await handler.HandleAsync(message, cancellationToken);
         }
 

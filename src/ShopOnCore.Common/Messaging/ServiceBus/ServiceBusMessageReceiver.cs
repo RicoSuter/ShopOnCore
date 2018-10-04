@@ -7,7 +7,8 @@ using Newtonsoft.Json;
 
 namespace ShopOnCore.Common.Messaging.ServiceBus
 {
-    public class ServiceBusMessageReceiver<TMessage> : MessageReceiver<TMessage, Message>
+    public class ServiceBusMessageReceiver<TMessage, TMessageHandler> : MessageReceiver<TMessage, Message, TMessageHandler>
+        where TMessageHandler : IMessageHandler<TMessage>
     {
         private readonly string _connectionString;
         private readonly string _entityPath;

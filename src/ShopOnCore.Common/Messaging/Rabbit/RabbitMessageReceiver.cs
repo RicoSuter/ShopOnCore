@@ -8,7 +8,8 @@ using RabbitMQ.Client.Events;
 
 namespace ShopOnCore.Common.Messaging.Rabbit
 {
-    public class RabbitMessageReceiver<TMessage> : MessageReceiver<TMessage, BasicDeliverEventArgs>
+    public class RabbitMessageReceiver<TMessage, TMessageHandler> : MessageReceiver<TMessage, BasicDeliverEventArgs, TMessageHandler>
+        where TMessageHandler : IMessageHandler<TMessage>
     {
         private readonly RabbitConfiguration _configuration;
         private IConnection _connection;

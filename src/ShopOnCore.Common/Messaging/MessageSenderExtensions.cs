@@ -9,7 +9,7 @@ namespace ShopOnCore.Common.Messaging
         public static void AddMessageSender<TMessage>(this IServiceCollection serviceCollection, 
             Func<IServiceProvider, IMessageSender<TMessage>> factory)
         {
-            serviceCollection.TryAddScoped(typeof(IMessageSender<TMessage>), factory);
+            serviceCollection.TryAddScoped(factory);
         }
     }
 }

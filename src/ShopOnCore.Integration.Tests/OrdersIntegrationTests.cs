@@ -37,7 +37,7 @@ namespace ShopOnCore.Integration.Tests
         protected override void ConfigureTestServerServices(IServiceCollection serviceCollection)
         {
             serviceCollection.TryAddScoped<IOrdersService, InMemoryOrdersService>();
-            serviceCollection.AddInProcessMessageHandler<CreateOrderMessageHandler, CreateOrderMessage>();
+            serviceCollection.AddInProcessMessageSender<CreateOrderMessage, CreateOrderMessageHandler>();
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace ShopOnCore.Integration.Tests
                 return orders.FirstOrDefault(o => o.Product == guid);
             }, TimeSpan.FromSeconds(30));
 
-            Assert.Equal(guid, order.Id);
+            Assert.Equal(guid, order.Product);
             Assert.Equal(3, order.Amount);
         }
     }
