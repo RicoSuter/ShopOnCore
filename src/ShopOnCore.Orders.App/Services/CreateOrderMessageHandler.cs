@@ -12,6 +12,7 @@ namespace ShopOnCore.Orders.App.Services
 
         public CreateOrderMessageHandler(IOrdersService ordersService)
         {
+            // This handler is created by the message receiver which is registered in Program.cs
             _ordersService = ordersService;
         }
 

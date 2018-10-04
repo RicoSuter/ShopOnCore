@@ -24,10 +24,14 @@ namespace ShopOnCore.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddSwagger();
 
+            // Register the orders service which handles the data access 
+            // We use TryAddScoped so that we can replace the service in tests
             services.TryAddScoped<IOrdersService, OrdersService>();
+
+            // Register the message sender to send order request to a queue (injected into the orders controller)
+            // AddMessageSender is a custom method implemented in ShopOnCore.Common
             services.AddMessageSender(provider => new RabbitMessageSender<CreateOrderMessage>(
                 new RabbitConfiguration { Host = "rabbit_queue" }));
         }
@@ -43,6 +47,7 @@ namespace ShopOnCore.Web
                 app.UseHsts();
             }
 
+            // Register Swagger UI provided by http://nswag.org
             app.UseSwaggerUi3WithApiExplorer();
 
             app.UseHttpsRedirection();

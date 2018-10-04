@@ -28,6 +28,7 @@ namespace ShopOnCore.Web.Controllers
                 Amount = amount
             };
 
+            // Publish the message to the rabbitmq or in-memory queue
             await _messageSender.SendMessageAsync(message);
         }
 

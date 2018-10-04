@@ -29,12 +29,14 @@ namespace ShopOnCore.Orders.App
               {
                   services.AddOptions();
 
-                  // Register custom services
+                  // Register the orders service which handles the data access 
                   services.TryAddScoped<IOrdersService, OrdersService>();
 
-                  // Register hosted service (entry point)
-                  services.AddMessageReceiver((serviceProvider, scopeFactory) => new RabbitMessageReceiver<CreateOrderMessage, CreateOrderMessageHandler>(
-                      new RabbitConfiguration { Host = "rabbit_queue" }, scopeFactory));
+                  // Register the message receiver as .NET Core hosted service (IHostedService)
+                  // AddMessageReceiver is a custom method implemented in ShopOnCore.Common
+                  services.AddMessageReceiver((serviceProvider, scopeFactory) => 
+                      new RabbitMessageReceiver<CreateOrderMessage, CreateOrderMessageHandler>(
+                          new RabbitConfiguration { Host = "rabbit_queue" }, scopeFactory));
               })
               .ConfigureLogging((hostingContext, logging) =>
               {

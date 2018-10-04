@@ -36,8 +36,12 @@ namespace ShopOnCore.Integration.Tests
 
         protected override void ConfigureTestServerServices(IServiceCollection serviceCollection)
         {
+            // For local testing, we use a in-memory based orders service
             serviceCollection.TryAddScoped<IOrdersService, InMemoryOrdersService>();
-            serviceCollection.AddInProcessMessageSender<CreateOrderMessage, CreateOrderMessageHandler>();
+
+            // Now we register a message sender which directly processes the message in-process 
+            // for that, we need a reference to the message handler class (which would run in a separate process)
+            serviceCollection.AddBlockingInProcessMessageSender<CreateOrderMessage, CreateOrderMessageHandler>();
         }
 
         [Fact]
@@ -50,6 +54,8 @@ namespace ShopOnCore.Integration.Tests
             await HttpClient.PostAsync("api/orders?product=" + guid + "&amount=3", new StringContent(string.Empty));
 
             // Assert
+            // Here we need to await until the message has been processed
+            // when testing in-process with a blocking sender, we don't need this
             var order = await AwaitNotNullAsync(async () =>
             {
                 var response = await HttpClient.GetAsync("api/orders");
