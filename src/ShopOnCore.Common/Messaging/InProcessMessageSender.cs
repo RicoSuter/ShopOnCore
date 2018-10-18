@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopOnCore.Common.Messaging.Interfaces;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,11 +17,11 @@ namespace ShopOnCore.Common.Messaging
             _blockUntilProcessed = blockUntilProcessed;
         }
 
-        public async Task SendMessageAsync(TMessage message)
+        public async Task SendMessageAsync(TMessage message, CancellationToken cancellationToken)
         {
             if (_blockUntilProcessed)
             {
-                await _handler.HandleAsync(message, CancellationToken.None);
+                await _handler.HandleAsync(message, cancellationToken);
             }
             else
             {
@@ -29,7 +30,7 @@ namespace ShopOnCore.Common.Messaging
                 {
                     try
                     {
-                        await _handler.HandleAsync(message, CancellationToken.None);
+                        await _handler.HandleAsync(message, cancellationToken);
                     }
                     catch (Exception exception)
                     {

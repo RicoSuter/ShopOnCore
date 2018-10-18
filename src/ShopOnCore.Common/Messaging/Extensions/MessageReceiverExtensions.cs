@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using System;
 
-namespace ShopOnCore.Common.Messaging
+namespace ShopOnCore.Common.Messaging.Extensions
 {
     public static class MessageReceiverExtensions
     {

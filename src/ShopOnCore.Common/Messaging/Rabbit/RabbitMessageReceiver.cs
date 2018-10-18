@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using ShopOnCore.Common.Messaging.Interfaces;
 
 namespace ShopOnCore.Common.Messaging.Rabbit
 {

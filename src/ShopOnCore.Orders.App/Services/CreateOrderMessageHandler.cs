@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using ShopOnCore.Common.Messaging;
+using ShopOnCore.Common.Messaging.Interfaces;
 using ShopOnCore.Orders.Contract;
 using ShopOnCore.Orders.Services;
 

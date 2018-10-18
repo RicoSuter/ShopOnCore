@@ -1,7 +1,9 @@
 ﻿using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
+using ShopOnCore.Common.Messaging.Interfaces;
 
 namespace ShopOnCore.Common.Messaging.ServiceBus
 {
@@ -14,7 +16,7 @@ namespace ShopOnCore.Common.Messaging.ServiceBus
             _queueClient = new QueueClient(connectionString, entityPath);
         }
 
-        public async Task SendMessageAsync(TMessage message)
+        public async Task SendMessageAsync(TMessage message, CancellationToken cancellationToken)
         {
             var bytes = SerializeMessage(message);
 

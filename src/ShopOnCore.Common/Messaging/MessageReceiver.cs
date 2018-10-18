@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShopOnCore.Common.Messaging.Interfaces;
 
 namespace ShopOnCore.Common.Messaging
 {

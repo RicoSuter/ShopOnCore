@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using ShopOnCore.Common.Messaging.Interfaces;
 
 namespace ShopOnCore.Common.Messaging.ServiceBus
 {

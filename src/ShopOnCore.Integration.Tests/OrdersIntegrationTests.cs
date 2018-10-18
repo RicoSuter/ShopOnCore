@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json;
-using ShopOnCore.Common.Messaging;
 using ShopOnCore.Orders.App.Services;
 using ShopOnCore.Orders.Contract;
 using ShopOnCore.Orders.Services;
 using Xunit;
+using ShopOnCore.Common.Messaging.Extensions;
 
 namespace ShopOnCore.Integration.Tests
 {

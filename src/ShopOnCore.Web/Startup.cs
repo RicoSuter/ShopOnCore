@@ -5,10 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using NSwag.AspNetCore;
-using ShopOnCore.Common.Messaging;
 using ShopOnCore.Common.Messaging.Rabbit;
 using ShopOnCore.Orders.Contract;
 using ShopOnCore.Orders.Services;
+using ShopOnCore.Common.Messaging.Extensions;
 
 namespace ShopOnCore.Web
 {

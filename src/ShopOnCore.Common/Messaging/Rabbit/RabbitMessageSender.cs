@@ -1,7 +1,9 @@
 ﻿using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using ShopOnCore.Common.Messaging.Interfaces;
 
 namespace ShopOnCore.Common.Messaging.Rabbit
 {
@@ -14,7 +16,7 @@ namespace ShopOnCore.Common.Messaging.Rabbit
             _configuration = configuration;
         }
 
-        public Task SendMessageAsync(TMessage message)
+        public Task SendMessageAsync(TMessage message, CancellationToken cancellationToken)
         {
             var factory = new ConnectionFactory
             {

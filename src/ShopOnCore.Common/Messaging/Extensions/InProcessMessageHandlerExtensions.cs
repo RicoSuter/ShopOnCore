@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ShopOnCore.Common.Messaging.Interfaces;
 
-namespace ShopOnCore.Common.Messaging
+namespace ShopOnCore.Common.Messaging.Extensions
 {
     public static class InProcessMessageHandlerExtensions
     {

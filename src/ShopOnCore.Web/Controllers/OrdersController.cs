@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ShopOnCore.Common.Messaging;
+using ShopOnCore.Common.Messaging.Interfaces;
 using ShopOnCore.Orders.Contract;
 using ShopOnCore.Orders.Services;
 
@@ -29,7 +30,7 @@ namespace ShopOnCore.Web.Controllers
             };
 
             // Publish the message to the rabbitmq or in-memory queue
-            await _messageSender.SendMessageAsync(message);
+            await _messageSender.SendMessageAsync(message, CancellationToken.None);
         }
 
         [HttpGet]
