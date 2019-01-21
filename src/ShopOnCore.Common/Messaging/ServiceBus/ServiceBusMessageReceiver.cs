@@ -30,7 +30,7 @@ namespace ShopOnCore.Common.Messaging.ServiceBus
 
             _queueClient.RegisterMessageHandler(async (message, token) =>
             {
-                var result = await HandleMessageAsync(message, token);
+                var result = await HandleMessageAsync(message, false, token);
                 if (result)
                 {
                     await _queueClient.CompleteAsync(message.SystemProperties.LockToken);

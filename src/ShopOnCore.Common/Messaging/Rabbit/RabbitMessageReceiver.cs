@@ -42,7 +42,7 @@ namespace ShopOnCore.Common.Messaging.Rabbit
             var consumer = new AsyncEventingBasicConsumer(_channel);
             consumer.Received += async (o, a) =>
             {
-                var result = await HandleMessageAsync(a, CancellationToken.None);
+                var result = await HandleMessageAsync(a, true, CancellationToken.None);
                 if (result)
                 {
                     _channel.BasicAck(a.DeliveryTag, false);

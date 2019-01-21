@@ -21,7 +21,7 @@ namespace ShopOnCore.Common.Messaging
 
         public abstract Task StopAsync(CancellationToken cancellationToken);
 
-        protected async Task<bool> HandleMessageAsync(TRawMessage rawMessage, CancellationToken cancellationToken)
+        protected async Task<bool> HandleMessageAsync(TRawMessage rawMessage, bool handleExceptions, CancellationToken cancellationToken)
         {
             using (var serviceScope = _serviceScopeFactory.CreateScope())
             {
@@ -32,8 +32,15 @@ namespace ShopOnCore.Common.Messaging
                 }
                 catch (Exception e)
                 {
-                    await HandleExceptionAsync(e, cancellationToken);
-                    return false;
+                    if (handleExceptions)
+                    {
+                        await HandleExceptionAsync(e, cancellationToken);
+                        return false;
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
         }
